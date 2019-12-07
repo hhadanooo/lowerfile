@@ -20,12 +20,13 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 import ir.hhadanooo.converter.R;
 
 public class Activity_hadanooo extends AppCompatActivity {
 
-    Button btn_submit;
+    Button btn_submit  ,btn_test;
     ImageView img;
     DisplayMetrics dm;
 
@@ -37,6 +38,7 @@ public class Activity_hadanooo extends AppCompatActivity {
 
 
         btn_submit = findViewById(R.id.btn_submit);
+        btn_test = findViewById(R.id.btn_test);
         img = findViewById(R.id.img);
 
         if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
@@ -48,9 +50,13 @@ public class Activity_hadanooo extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
 
-        final Bitmap bitmap = BitmapFactory.decodeResource(getResources() , R.drawable.whait , null);
-        final Bitmap mBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-        final Bitmap myBitmap = Bitmap.createScaledBitmap(mBitmap, 300, 300, false);
+        final Bitmap bit = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath() +
+                "/raminhacker/hhdanooo.PNG");
+
+        //final Bitmap bitmap = BitmapFactory.decodeResource(getResources() , R.drawable.bac , null);
+        final Bitmap bitmap = Bitmap.createBitmap( 1000 , 1000 , Bitmap.Config.ARGB_4444);
+        final Bitmap myBitmap = bitmap.copy(Bitmap.Config.ARGB_4444,true);
+        //final Bitmap myBitmap = Bitmap.createScaledBitmap(mBitmap, 500, 500, false);
 
 
 
@@ -66,18 +72,24 @@ public class Activity_hadanooo extends AppCompatActivity {
 
 
                 //method 1
-                /*int[] pixels = new int[myBitmap.getHeight()*myBitmap.getWidth()];
+                int[] pixels = new int[myBitmap.getHeight()*myBitmap.getWidth()];
                 myBitmap.getPixels(pixels, 0, myBitmap.getWidth(), 0, 0, myBitmap.getWidth(), myBitmap.getHeight());
-                for (int i=0; i<myBitmap.getWidth()*150; i++)
-                    pixels[i] = Color.rgb(15,200 ,150);
-                myBitmap.setPixels(pixels, 0, myBitmap.getWidth(), 0, 0, myBitmap.getWidth(), myBitmap.getHeight());
+                for (int i=0; i<1000; i++){
+                    //i++;
+                    Random rand = new Random();
+                    for (int i1=0; i1<1000; i1++){
+                        //i1++;
+                        int r = rand.nextInt(250);
+                        int g = rand.nextInt(250);
+                        int b = rand.nextInt(250);
+                        myBitmap.setPixel(i , i1 , Color.rgb(r,g,b));
+                    }
 
+                    //pixels[i] = Color.rgb( r , g , b);
+                }
+                //myBitmap.setPixels(pixels, 0, myBitmap.getWidth(), 0, 0, myBitmap.getWidth(), myBitmap.getHeight());
 
-                for (int i=myBitmap.getWidth()*150; i<myBitmap.getWidth()*300; i++)
-                    pixels[i] = Color.rgb(155,140 ,10);
-                myBitmap.setPixels(pixels, 0, myBitmap.getWidth(), 0, 0, myBitmap.getWidth(), myBitmap.getHeight());*/
-
-                Toast.makeText(Activity_hadanooo.this, ""+myBitmap.getHeight()+"\n"+myBitmap.getWidth(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Activity_hadanooo.this, ""+myBitmap.getHeight()+"\n"+myBitmap.getWidth(), Toast.LENGTH_SHORT).show();
 
 
 
@@ -86,7 +98,7 @@ public class Activity_hadanooo extends AppCompatActivity {
 
                 //method 2
 
-                myBitmap.setPixel(0 , 4 , Color.rgb(30,93,135));
+                /*myBitmap.setPixel(0 , 4 , Color.rgb(30,93,135));
                 myBitmap.setPixel(1 , 4 , Color.rgb(30,93,135));
                 myBitmap.setPixel(0 , 5 , Color.rgb(35,50,40));
                 myBitmap.setPixel(1 , 5 , Color.rgb(35,50,40));
@@ -129,7 +141,15 @@ public class Activity_hadanooo extends AppCompatActivity {
                 myBitmap.setPixel(20 , 4 , Color.rgb(36,37,35));
                 myBitmap.setPixel(21 , 4 , Color.rgb(36,37,35));
                 myBitmap.setPixel(20 , 5 , Color.rgb(63,73,53));
-                myBitmap.setPixel(21 , 5 , Color.rgb(63,73,53));
+                myBitmap.setPixel(21 , 5 , Color.rgb(63,73,53));*/
+
+                Toast.makeText(Activity_hadanooo.this,
+                                ""+Color.red(myBitmap.getPixel(50 , 50))
+                                +"\n"+Color.green(myBitmap.getPixel(50 , 50))
+                                +"\n"+Color.blue(myBitmap.getPixel(50 , 50)), Toast.LENGTH_SHORT).show();
+
+
+               ;
 
 
 
@@ -140,7 +160,7 @@ public class Activity_hadanooo extends AppCompatActivity {
                 File dir = new File(file_path);
                 if(!dir.exists())
                     dir.mkdirs();
-                File file = new File(dir, "hhdanooo"+ ".png");
+                File file = new File(dir, "hhdanooo"+ ".PNG");
                 try {
                     FileOutputStream fOut = new FileOutputStream(file);
                     myBitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
@@ -151,6 +171,19 @@ public class Activity_hadanooo extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Toast.makeText(Activity_hadanooo.this,
+                        ""+bit.getHeight()+"\n"+bit.getWidth(), Toast.LENGTH_SHORT).show();*/
+                Toast.makeText(Activity_hadanooo.this,
+                        ""+Color.red(bit.getPixel(50 , 50))
+                                +"\n"+Color.green(bit.getPixel(50 , 50))
+                                +"\n"+Color.blue(bit.getPixel(50 , 50)), Toast.LENGTH_SHORT).show();
+                img.setImageBitmap(bit);
             }
         });
 

@@ -16,6 +16,13 @@
         android:id="@+id/btn_submit"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_marginBottom="50dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="check x file"
+        android:id="@+id/btn_test"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_marginBottom="50dp"/>
 
     <ImageView
         android:layout_width="wrap_content"
